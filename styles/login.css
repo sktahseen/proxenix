@@ -1,0 +1,292 @@
+/* Import Bootstrap 5 CSS from CDN */
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
+
+/* Custom styles for an attractive login form with sliding animation */
+body {
+    background: linear-gradient(135deg, #a7f3d0 0%, #bae6fd 100%); /* Vibrant green to blue gradient */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.login-wrapper {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    height: 650px; /* Increased height to fit forms */
+    overflow: hidden;
+    border-radius: 2rem; /* Curved sides for the wrapper */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background: #ffffff; /* White background for the wrapper */
+}
+
+.login-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #34d399 0%, #10b981 100%); /* Green gradient for the slide */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease-in-out;
+    z-index: 2;
+    border-radius: 2rem; /* Match the wrapper's curved sides */
+    will-change: transform, opacity; /* Optimize for animation */
+    opacity: 1;
+}
+
+.login-wrapper.active .login-slide {
+    transform: translateX(100%); /* Slide to the right */
+    opacity: 0; /* Fade out for smoother transition */
+}
+
+.login-wrapper.register-active .login-slide {
+    transform: translateX(-100%); /* Slide to the left for register */
+    opacity: 0; /* Fade out for smoother transition */
+}
+
+#login-trigger {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: #ffffff;
+    color: #10b981; /* Green to match the slide */
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1rem 2rem;
+    transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for the button */
+    will-change: transform, box-shadow; /* Optimize for animation */
+}
+
+#login-trigger:hover {
+    background: #ecfdf5; /* Light green on hover */
+    color: #047857; /* Darker green */
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.card.login-form, .card.register-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border: none;
+    border-radius: 2rem; /* Curved sides for the form */
+    box-shadow: none; /* No shadow since the wrapper already has one */
+    padding: 2.5rem;
+    transform: translateX(100%); /* Initially off-screen to the right */
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease-in-out;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0; /* Initially invisible */
+    will-change: transform, opacity; /* Optimize for animation */
+}
+
+.login-wrapper.active .login-form {
+    transform: translateX(0); /* Slide in from the right */
+    opacity: 1; /* Fade in */
+}
+
+.login-wrapper.register-active .login-form {
+    transform: translateX(-100%); /* Slide out to the left */
+    opacity: 0; /* Fade out */
+}
+
+.login-wrapper.register-active .register-form {
+    transform: translateX(0); /* Slide in from the right */
+    opacity: 1; /* Fade in */
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #047857; /* Dark green for the heading */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease; /* Smooth heading appearance */
+}
+
+.form-control {
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    padding: 1rem;
+    font-size: 1.2rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #10b981; /* Green border on focus */
+    box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
+    outline: none;
+    transform: scale(1.02); /* Subtle scaling for focus */
+}
+
+.form-control.password-input {
+    padding-right: 2.5rem; /* Space for the toggle icon */
+}
+
+.form-label {
+    font-size: 1.1rem;
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease; /* Smooth label color change */
+}
+
+.btn-primary {
+    background: #10b981; /* Green button */
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    will-change: transform, box-shadow; /* Optimize for animation */
+}
+
+.btn-primary:hover {
+    background: #047857; /* Darker green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Reset shadow */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 46%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6b7280;
+    z-index: 5;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #10b981; /* Green on hover */
+    transform: translateY(-50%) scale(1.1); /* Slight scale for interactivity */
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #fca5a5;
+    text-align: center;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: opacity 0.3s ease; /* Smooth alert appearance */
+}
+
+.form-text {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+    display: block;
+    transition: opacity 0.3s ease; /* Smooth text appearance */
+}
+
+.links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.links a {
+    color: #10b981;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.links a:hover {
+    color: #047857;
+    text-decoration: underline;
+    transform: translateY(-1px); /* Subtle lift on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .login-wrapper {
+        max-width: 95%;
+        height: auto;
+        min-height: 550px;
+        padding: 1rem;
+    }
+
+    .card.login-form, .card.register-form {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        padding: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary {
+        padding: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    #login-trigger {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem;
+    }
+
+    .form-text {
+        font-size: 0.8rem;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .links a {
+        margin: 0;
+    }
+}

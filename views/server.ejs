@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatApp - Select User</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome, <%= username %></h1>
+    <h2>Select a User to Chat</h2>
+    <div class="user-list">
+      <% users.forEach(user => { %>
+        <% if (user.username !== username) { %>
+          <div class="user">
+            <a href="/chat/<%= user.username %>">
+              <span><%= user.username %></span>
+              <span class="status <%= user.online ? 'online' : 'offline' %>">
+                <%= user.online ? 'Online' : 'Last seen: ' + new Date(user.lastSeen).toLocaleString() %>
+              </span>
+            </a>
+          </div>
+        <% } %>
+      <% }) %>
+    </div>
+    <a href="/chat">Go to Group Chat</a>
+    <form action="/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>
